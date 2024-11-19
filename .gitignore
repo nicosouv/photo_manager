@@ -1,0 +1,45 @@
+# Python compiled files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+env/
+
+# Environment and configuration files
+config.local.json
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+*.log
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDE and editor specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Cache and package files
+*.egg-info/
+.eggs/
+*.egg
+*.wheel
+dist/
+build/
+
+# Virtual env
+.venv
+
+# Google Cloud credentials
+*.json
+
+# ZIP files
+*.zip
