@@ -3,11 +3,13 @@ from googleapiclient.http import MediaIoBaseDownload
 import io
 import os
 
+
 def list_files_in_drive(service, folder_id):
     """Liste les fichiers dans un dossier Google Drive donné."""
     query = f"'{folder_id}' in parents and trashed=false"
     results = service.files().list(q=query).execute()
-    return results.get('files', [])
+    return results.get("files", [])
+
 
 def download_file(service, file_id, destination_path):
     """Télécharge un fichier depuis Google Drive."""

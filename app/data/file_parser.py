@@ -2,19 +2,23 @@ from typing import List, Dict, Union
 from pathlib import Path
 from googleapiclient.discovery import Resource
 
+
 def is_google_drive_path(path: str) -> bool:
     """Détecte si un chemin correspond à un ID Google Drive."""
     return len(path) == 33 and not Path(path).exists()
 
+
 def parse_local_files(directory: Path, extensions: List[str]) -> List[Path]:
     """Parse les fichiers dans un répertoire local."""
-    return [f for f in directory.iterdir() if f.suffix in extensions]
+    return [f for f in directory.iterdir() if f.suffix.lower() in extensions]
+
 
 def list_files_in_drive(service: Resource, folder_id: str) -> List[Dict[str, str]]:
     """Liste les fichiers dans un dossier Google Drive donné."""
     query = f"'{folder_id}' in parents and trashed=false"
     results = service.files().list(q=query).execute()
-    return results.get('files', [])
+    return results.get("files", [])
+
 
 def process_input_path(service: Resource, input_path: Union[str, Path]) -> None:
     """Traite les fichiers à partir d'un chemin local ou Google Drive."""
