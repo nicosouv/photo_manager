@@ -5,7 +5,7 @@ from googleapiclient.discovery import build
 import os
 from pathlib import Path
 from config.logging_config import Logger
-
+from models.file import File
 
 logger = Logger().logger
 
@@ -15,9 +15,11 @@ def is_google_drive_path(path: str) -> bool:
     return len(path) == 33 and not Path(path).exists()
 
 
-def list_files(directory: Path, extensions: List[str]) -> List[Path]:
+def list_files(directory: Path, extensions: List[str]) -> List["File"]:
     """Parse and list local files"""
-    return [f for f in directory.iterdir() if f.suffix.lower() in extensions]
+    paths = [f for f in directory.iterdir() if f.suffix.lower() in extensions]
+    files = [File(path) for path in paths]
+    return files
 
 
 def parse_local_files(input_path: str):
